@@ -21,11 +21,19 @@ class mascotasController {
     }
 
     public function getMascotas() {
+        $sort = $this->getOrderBy();
+        $tipo = $this->getWhere();
+        
+        $mascotas = $this->model->getAllMascotas($tipo, $sort);
+        $this->view->response($mascotas);
+    }
+
+    public function getOrderBy(){
         $sort = '';
         if (key_exists('sort', $_GET)) {
             $sort = $_GET['sort'];
             if ($sort != 'id_mascota' && $sort != 'nombre' && $sort != 'tipo' && $sort != 'raza' && $sort != 'id_cliente'){
-                $this->view->response("Error en parametro GET, la columna '$sort' no existe", 400);
+                $this->view->response("Error en parametro GET, la columna '$sort' no existe en la tabla 'Mascotas' ", 400);
                 die();
             }
             if (key_exists('order', $_GET)) {
@@ -36,9 +44,21 @@ class mascotasController {
         else {
             $sort = 'ORDER BY id_mascota';
         }
-        
-        $mascotas = $this->model->getAllMascotas($sort);
-        $this->view->response($mascotas);
+        return $sort;
+    }
+
+    public function getWhere(){
+        $tipo = '';
+        if (key_exists('tipo', $_GET)) {
+            $tipo = $_GET['tipo'];
+            if ($tipo!="gato" && $tipo!="perro"){
+                $this->view->response("Error en parametro GET, el 'tipo' debe ser 'perro' o 'gato' ", 400);
+                die();    
+            }
+            else
+                $tipo = "WHERE tipo = '$tipo'";
+        }
+        return $tipo;
     }
 
     public function getMascota($params = null) {
