@@ -9,12 +9,6 @@ class mascotasModel {
     }
 
     public function getAllMascotas($tipo, $sort) {
-        //SELECT * FROM `mascotas` WHERE tipo = 'gato' ORDER BY nombre
-        /*SELECT mascotas.*, clientes.nombre as nombre_cliente 
-        FROM `mascotas` 
-        JOIN clientes ON mascotas.id_cliente = clientes.id_cliente
-        WHERE tipo = 'gato' ORDER BY nombre */
-        //$query = $this->db->prepare("SELECT * FROM mascotas $tipo $sort");
         $query = $this->db->prepare("SELECT mascotas.*, clientes.nombre as nombre_cliente 
                                     FROM `mascotas` 
                                     JOIN clientes ON mascotas.id_cliente = clientes.id_cliente $tipo $sort");
@@ -46,7 +40,6 @@ class mascotasModel {
         $query = $this->db->prepare('UPDATE mascotas 
             SET `nombre`= ?, `tipo`=?, `raza`= ?, `id_cliente`= ? WHERE id_mascota = ?');
         $query->execute([$nombre, $tipo, $raza, $id_cliente, $id_mascota]);
-        // var_dump($query->errorInfo()); // y eliminar la redireccion
     }
 
 }

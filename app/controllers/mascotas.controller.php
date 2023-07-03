@@ -32,18 +32,19 @@ class mascotasController {
         $sort = '';
         if (key_exists('sort', $_GET)) {
             $sort = $_GET['sort'];
-            if ($sort != 'id_mascota' && $sort != 'nombre' && $sort != 'tipo' && $sort != 'raza' && $sort != 'id_cliente'){
+            if ($sort != 'id_mascota' && $sort != 'nombre' && $sort != 'tipo' && $sort != 'raza' && $sort != 'id_cliente') {
                 $this->view->response("Error en parametro GET, la columna '$sort' no existe en la tabla 'Mascotas' ", 400);
                 die();
             }
             if (key_exists('order', $_GET)) {
-                $sort = $sort . ' '.$_GET['order'];
+                if ($_GET['order'] != "asc" && $_GET['order'] != "ASC" && $_GET['order'] != "desc" && $_GET['order'] != "DESC") {
+                    $this->view->response("Error, el orden debe ser 'asc', 'ASC', 'desc' o 'DESC' ", 400);
+                    die();
+                } else $sort = $sort . ' ' . $_GET['order'];
             }
-            $sort = 'ORDER BY '.$sort;
-        }
-        else {
-            $sort = 'ORDER BY id_mascota';
-        }
+            $sort = 'ORDER BY ' . $sort;
+        } else $sort = 'ORDER BY id_mascota';
+
         return $sort;
     }
 
