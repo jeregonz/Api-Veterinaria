@@ -32,7 +32,7 @@ class mascotasController {
         $sort = '';
         if (key_exists('sort', $_GET)) {
             $sort = $_GET['sort'];
-            if ($sort != 'id_mascota' && $sort != 'nombre' && $sort != 'tipo' && $sort != 'raza' && $sort != 'id_cliente') {
+            if ($sort != 'id_mascota' && $sort != 'nombre' && $sort != 'tipo' && $sort != 'raza' && $sort != 'id_cliente'&& $sort != 'nombre_cliente') {
                 $this->view->response("Error en parametro GET, la columna '$sort' no existe en la tabla 'Mascotas' ", 400);
                 die();
             }
