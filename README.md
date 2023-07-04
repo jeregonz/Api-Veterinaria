@@ -82,7 +82,7 @@ http://localhost/carpetalocal/api-veterinaria/api/
 
 ### 9.- Realizar altas
 | URL | Verbo | Respuesta |
-| :------------ | :------------ | 
+| :------------ | :------------ | :------------ |
 | http://localhost/api-veterinaria/api/mascotas/ | POST | Genera un nuevo recurso | 
 
 Formato de envío
@@ -110,7 +110,7 @@ Resultado
 -----------
 ### 10.- Realizar modificaciones
 | URL | Verbo | Respuesta |
-| :------------ | :------------ | 
+| :------------ | :------------ | :------------ |
 | http://localhost/api-veterinaria/api/mascotas/3 | PUT | Modifica los datos de un recurso existente. | 
 
 Antes
